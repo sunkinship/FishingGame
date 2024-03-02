@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e5701882369ecc64486648dc59159875
+guid: ac4a34157173e8f43b516c1c1ce8f636
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zap Begin-Sheet_0
+      name: Yay Animation-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 372598ed0727e7c439be09669cabd893
-      internalID: 1183725057
+      spriteID: 02d065636c1fe584aa313b7e108b3468
+      internalID: -1818973515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zap Begin-Sheet_1
+      name: Yay Animation-Sheet_1
       rect:
         serializedVersion: 2
         x: 128
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f85f748dabda13d4eb2c2afb8862257e
-      internalID: -2143645865
+      spriteID: c2f4a96ba001d954fba554db8c76dd0f
+      internalID: 1251603013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zap Begin-Sheet_2
+      name: Yay Animation-Sheet_2
       rect:
         serializedVersion: 2
         x: 256
@@ -161,8 +161,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed58ed874c9b08341b3a8c3d2edad69b
-      internalID: -1415239347
+      spriteID: ca63bc32d95c56a4b8f42efc34d00d49
+      internalID: 378434861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yay Animation-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52f2b91dfd2afd04aa88e2825c67efa9
+      internalID: -290721703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yay Animation-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a43e01c3e368be745b39cfe94571cc39
+      internalID: 1776028401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yay Animation-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3712ae8984c5bc4fae1647950a3cb51
+      internalID: -1675366922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yay Animation-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0cc3b4070bb0a94ebed8f5d80052513
+      internalID: 1476288623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yay Animation-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76025fba04a42eb47999e6f428f228e7
+      internalID: 1848903690
       vertices: []
       indices: 
       edges: []
@@ -178,9 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Zap Begin-Sheet_0: 1183725057
-      Zap Begin-Sheet_2: -1415239347
-      Zap Begin-Sheet_1: -2143645865
+      Yay Animation-Sheet_6: 1476288623
+      Yay Animation-Sheet_4: 1776028401
+      Yay Animation-Sheet_3: -290721703
+      Yay Animation-Sheet_5: -1675366922
+      Yay Animation-Sheet_0: -1818973515
+      Yay Animation-Sheet_2: 378434861
+      Yay Animation-Sheet_7: 1848903690
+      Yay Animation-Sheet_1: 1251603013
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
