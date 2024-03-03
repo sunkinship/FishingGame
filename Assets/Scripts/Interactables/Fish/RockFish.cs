@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class RockFish : BaseFish
 {
-    [Header("Rock Fish Settings")]
-    [SerializeField] private Animator anim;
+    public bool IsShattered {  get; private set; }  
 
-    private bool isShattered;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Shatter()
     {
-        //no need to check for asteroid if already shattered
-        if (isShattered)
-            return;
+        IsShattered = true;
+        GameManager.Instance.HookedRockFish = false;
+        anim.SetTrigger("Shatter");
+    }
 
-        if (collision.gameObject.CompareTag("Asteroid"))
-        {
-            anim.SetTrigger("Shatter");
-        }
+    public override void Hooked(Transform catchPoint)
+    {
+        base.Hooked(catchPoint);
+        GameManager.Instance.HookedRockFish = true;
     }
 }

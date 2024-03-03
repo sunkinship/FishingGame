@@ -945,6 +945,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &504124462
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1799862223}
+    m_Modifications:
+    - target: {fileID: 419259553903926507, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_Name
+      value: Asteroid (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dcf12efa35889624795752e128da79b8, type: 3}
 --- !u!1 &535420473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,6 +1377,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &603180074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
+  m_PrefabInstance: {fileID: 504124462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &690012436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,6 +2515,7 @@ MonoBehaviour:
   playerAnim: {fileID: 893991119}
   catchPoint: {fileID: 389260366}
   currentFish: {fileID: 0}
+  HookedRockFish: 0
 --- !u!4 &1185764555
 Transform:
   m_ObjectHideFlags: 0
@@ -3398,9 +3461,9 @@ MonoBehaviour:
   waveStrength: 0.2
   waveSpeed: 2
   sr: {fileID: 1676711507}
+  anim: {fileID: 1676711509}
   hookPointOffset: -0.5
   state: 0
-  anim: {fileID: 1676711509}
 --- !u!1 &1678903428
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,6 +3716,7 @@ MonoBehaviour:
   minPosition: {fileID: 1814361740}
   maxPosition: {fileID: 80730973}
   fishingLine: {fileID: 1695435010}
+  slowReelSpeed: 0.5
 --- !u!114 &1695435010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3738,8 +3802,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1539514257}
   - {fileID: 548218277}
+  - {fileID: 1539514257}
+  - {fileID: 603180074}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4206,15 +4271,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.58
+      value: 6.35
       objectReference: {fileID: 0}
     - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.21
+      value: -3.88
       objectReference: {fileID: 0}
     - target: {fileID: 419259553903926517, guid: dcf12efa35889624795752e128da79b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4332,7 +4397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5770975835590404884, guid: 72a6df1e5fe43f542bc98e0920767da3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5770975835590404884, guid: 72a6df1e5fe43f542bc98e0920767da3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4375,8 +4440,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5770975835590404887, guid: 72a6df1e5fe43f542bc98e0920767da3, type: 3}
-      propertyPath: waveStrength
+      propertyPath: moveSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770975835590404887, guid: 72a6df1e5fe43f542bc98e0920767da3, type: 3}
+      propertyPath: waveSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770975835590404887, guid: 72a6df1e5fe43f542bc98e0920767da3, type: 3}
+      propertyPath: waveStrength
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72a6df1e5fe43f542bc98e0920767da3, type: 3}

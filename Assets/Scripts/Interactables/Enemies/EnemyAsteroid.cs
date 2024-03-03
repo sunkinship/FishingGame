@@ -19,7 +19,11 @@ public class EnemyAsteroid : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
 
+    private bool shatteredRock;
+
     private EntityMovement moveController;
+
+    private GameManager Manager => GameManager.Instance;
 
     private void Start()
     {
@@ -34,14 +38,34 @@ public class EnemyAsteroid : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GameManager.Instance.IsFishCaught == false)
+        if (Manager.IsFishCaught == false)
             return;
 
         if (collision.gameObject.CompareTag("Fish"))
         {
-            if (collision.gameObject.GetComponent<BaseFish>().state == BaseFish.FishState.hooked)
-                GameManager.Instance.OnFishEscape();
-        }          
+            BaseFish fish = collision.gameObject.GetComponent<BaseFish>();
+
+            //this is a rock fish
+            if (fish is RockFish rockFish)
+            {
+                //only allow rock fish to escape if it has been shattered and this asteroid was not the one that shattered the rock
+                if (shatteredRock == false && rockFish.IsShattered)
+                    Manager.OnFishEscape();
+                //if rock fish is not shattered yet, shatter it
+                else
+                {
+                    shatteredRock = true;
+                    Manager.OnFishShatter();
+                }                 
+            }
+            //this is a regular fish
+            else
+            {
+                //allow fish to escape
+                if (fish.state == BaseFish.FishState.hooked)
+                    Manager.OnFishEscape();
+            }         
+        }     
     }
 
     private void Rotate()

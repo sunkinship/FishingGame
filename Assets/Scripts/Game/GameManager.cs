@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public bool IsZapped {  get; private set; }
     public bool CannotCatchFish => IsFishCaught || IsZapped;
 
+    public bool HookedRockFish;
+
     private bool playingYayAnim, playingLostAnim;
 
 
@@ -68,6 +70,17 @@ public class GameManager : MonoBehaviour
         currentFish.Escape();
     }
 
+    public void OnFishShatter()
+    {
+        if (IsFishCaught == false)
+            return;
+
+        if (currentFish is RockFish rockFish)
+        {
+            rockFish.Shatter();
+        }
+    }
+
     public void OnPlayerZap()
     {
         if (IsZapped)
@@ -75,13 +88,6 @@ public class GameManager : MonoBehaviour
 
         playerAnim.SetTrigger("Zap");
         IsZapped = true;
-        StartCoroutine(ZapTimer());
-    }
-
-    private IEnumerator ZapTimer()
-    {
-        yield return new WaitForSeconds(ZAP_TIME);
-        IsZapped = false;
     }
 
     #region ANIM TRIGGERS

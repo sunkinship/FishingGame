@@ -19,6 +19,7 @@ public class BaseFish : MonoBehaviour
 
     [Header("References")]
     [SerializeField] protected SpriteRenderer sr;
+    [SerializeField] protected Animator anim;
 
     [Header("Other Settings")]
     [SerializeField] protected float hookPointOffset;
@@ -48,12 +49,15 @@ public class BaseFish : MonoBehaviour
         swimController?.Move();
     }
 
-    public void Hooked(Transform catchPoint)
+    public virtual void Hooked(Transform catchPoint)
     {
         if (state == FishState.hooked)
             return;
 
         state = FishState.hooked;
+
+        //play hooked animation
+        anim.SetTrigger("Hooked");
 
         //make the fish follow the lure with an offset 
         transform.SetParent(catchPoint, false);
@@ -66,6 +70,9 @@ public class BaseFish : MonoBehaviour
             return;
 
         state = FishState.escaped;
+
+        //play swimming animation
+        anim.SetTrigger("Escaped");
 
         //remove the parent so the fish stops following the lure
         transform.SetParent(null);

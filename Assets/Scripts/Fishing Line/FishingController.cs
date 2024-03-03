@@ -8,7 +8,13 @@ public class FishingController : MonoBehaviour
 
     [SerializeField] private Transform movePoint, minPosition, maxPosition;
     [SerializeField] private FishingLine fishingLine;
+   
     private float mouseYPos;
+
+    [SerializeField] private float slowReelSpeed;
+
+    private Coroutine co_movingPoint = null;
+    private bool movingPoint => co_movingPoint != null;
 
     private void Start()
     {
@@ -20,8 +26,13 @@ public class FishingController : MonoBehaviour
     {
         //update mouse position
         mouseYPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+
         //move fishing line
-        ControlLine();
+        if (GameManager.Instance.HookedRockFish == false)
+            ControlLine();
+        else
+            SlowedControl();
+
         //check for mouse input
         MouseButtonPressed();
     }
@@ -43,7 +54,7 @@ public class FishingController : MonoBehaviour
         {
             movePoint.position = new Vector3(movePoint.position.x, mouseYPos, movePoint.position.z);
         }
-    }
+    }   
 
     //mouse position is above the bounds
     private bool MouseAboveBounds()
@@ -75,4 +86,54 @@ public class FishingController : MonoBehaviour
                 GameManager.Instance.OnFishRelease();
         }
     }
+
+    #region SLOW CONTROL
+    //slows down the speed of the line for when a rock fish is caught
+    private void SlowedControl()
+    {
+        //mouse is above bounds so bring line to top
+        if (MouseAboveBounds())
+        {
+            SlowReelMovement(minPosition.position);
+        }
+        //mouse is below bounds so expand line to max length
+        else if (MouseBelowBounds())
+        {
+            movePoint.position = maxPosition.position;
+        }
+        //mouse is within bounds so move line to mouse position
+        else
+        {
+            Vector3 target = new(movePoint.position.x, mouseYPos, movePoint.position.z);
+
+            //move up
+            if (target.y > movePoint.position.y)
+                SlowReelMovement(new Vector3(movePoint.position.x, mouseYPos, movePoint.position.z));
+            //move down
+            else
+                movePoint.position = new Vector3(movePoint.position.x, mouseYPos, movePoint.position.z);
+        }
+    }
+
+    private Coroutine SlowReelMovement(Vector3 target)
+    {
+        if (movingPoint)
+            StopCoroutine(co_movingPoint);
+
+        co_movingPoint = StartCoroutine(MoveToTarget(target));
+
+        return co_movingPoint;
+    }
+
+    private IEnumerator MoveToTarget(Vector3 target)
+    {      
+        while (Vector3.Distance(movePoint.position, target) > 0)
+        {
+            movePoint.position = Vector3.MoveTowards(movePoint.position, target, Time.deltaTime * slowReelSpeed);
+            yield return null;
+        }
+
+        co_movingPoint = null;
+    }
+    #endregion
 }

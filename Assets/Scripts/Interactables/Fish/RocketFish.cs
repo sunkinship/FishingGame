@@ -9,7 +9,6 @@ public class RocketFish : BaseFish
     [Header("Rocket Fish Settings")]
     [SerializeField] private float entryTime;
     [SerializeField] private float rocketSpeed;
-    [SerializeField] private Animator anim;
 
     protected override void Start()
     {
