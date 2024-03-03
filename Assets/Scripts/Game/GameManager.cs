@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
             playingYayAnim = true;
         }
 
+        //add score
+        ScoreManager.Instance.AddScore(currentFish);
+
         HookedRockFish = false;
         Destroy(currentFish.gameObject);
 

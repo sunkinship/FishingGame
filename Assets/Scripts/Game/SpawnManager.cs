@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
     private bool normalFishEnabled;
     private bool rocketFishEnabled;
     private bool rockFishEnabled;
-    private bool astroidEnabled;
+    private bool asteroidEnabled;
     private bool jellyfishEnabled;
 
     private float normalFishSpawnInterval = 3;
@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
             {             
                 Debug.Log("Enter Stage 1");
                 normalFishEnabled = true;
-                astroidEnabled = true;
+                asteroidEnabled = true;
                 currentStage++;
             }
             else if (currentStage == 1)
@@ -89,7 +89,7 @@ public class SpawnManager : MonoBehaviour
             {
                 Debug.Log("Enter Stage 4 (stop for tutorial)");
                 normalFishEnabled = false;
-                astroidEnabled = false;
+                asteroidEnabled = false;
                 rocketFishEnabled = false;
                 currentStage++;
             }
@@ -100,8 +100,9 @@ public class SpawnManager : MonoBehaviour
                 SpawnAsteroid();
                 rockFishEnabled = true;
                 rockFishSpawnInterval = 4;
-                astroidEnabled = true;
+                asteroidEnabled = true;
                 asteroidSpawnInterval = 2;
+                currentStage++;
             }
             else if (currentStage == 5)
             {
@@ -110,7 +111,7 @@ public class SpawnManager : MonoBehaviour
                 asteroidSpawnInterval = 4.5f;
                 rockFishSpawnInterval = 9;
                 normalFishEnabled = true;
-                astroidEnabled = true;
+                asteroidEnabled = true;
                 rocketFishEnabled = true;
                 currentStage++;
             }
@@ -139,7 +140,7 @@ public class SpawnManager : MonoBehaviour
             {
                 Debug.Log("Enter Stage 9 (stop end)");
                 normalFishEnabled = false;
-                astroidEnabled = false;
+                asteroidEnabled = false;
                 rocketFishEnabled = false;
                 rockFishEnabled = false;
                 jellyfishEnabled = false;
@@ -155,7 +156,7 @@ public class SpawnManager : MonoBehaviour
             CheckToSpawnRocketFish();
         if (rockFishEnabled)
             CheckToSpawnRockFish();
-        if (astroidEnabled)
+        if (asteroidEnabled)
             CheckToSpawnAsteroid();
         if (jellyfishEnabled)
             CheckToSpawnJellyfish();
