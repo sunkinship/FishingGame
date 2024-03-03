@@ -31,6 +31,9 @@ public class Jellyfish : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GameManager.Instance.IsZapped)
+            return;
+
         if (collision.gameObject.CompareTag("Line"))
         {
             //zap player

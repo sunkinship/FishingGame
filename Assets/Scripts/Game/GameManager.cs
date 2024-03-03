@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     private BaseFish currentFish = null;
     public bool IsFishCaught => currentFish != null;
 
-    private bool zapped;
-    public bool CannotCatchFish => IsFishCaught || zapped;
+    public bool IsZapped {  get; private set; }
+    public bool CannotCatchFish => IsFishCaught || IsZapped;
 
 
     private void Awake()
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
             currentFish.Escape();
 
             //only player lost animation if not being zapped as to not override zap animation
-            if (zapped == false)
+            if (IsZapped == false)
                 playerAnim.SetTrigger("Lost");
         }
             
@@ -48,13 +48,13 @@ public class GameManager : MonoBehaviour
     public void OnPlayerZap()
     {
         playerAnim.SetTrigger("Zap");
-        zapped = true;
+        IsZapped = true;
         StartCoroutine(ZapTimer());
     }
 
     private IEnumerator ZapTimer()
     {
         yield return new WaitForSeconds(ZAP_TIME);
-        zapped = false;
+        IsZapped = false;
     }
 }
