@@ -17,14 +17,20 @@ public class GameManager : MonoBehaviour
     public bool IsZapped {  get; private set; }
     public bool CannotCatchFish => IsFishCaught || IsZapped;
 
-    public bool HookedRockFish;
+    [HideInInspector] public bool HookedRockFish;
 
     private bool playingYayAnim, playingLostAnim;
 
+    AudioManager audioManger => AudioManager.Instance;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        audioManger.PlayMusic("Space Fishin'");
     }
 
     public void OnCatchConfirm()
@@ -36,9 +42,11 @@ public class GameManager : MonoBehaviour
         {
             playerAnim.SetTrigger("Yay");
             playingYayAnim = true;
-        }
+        } 
 
         Destroy(currentFish.gameObject);
+
+        audioManger.PlaySFX("Yay_SFX");
     }
 
     public void OnFishHooked(BaseFish fish)
@@ -48,6 +56,8 @@ public class GameManager : MonoBehaviour
 
         currentFish = fish;
         currentFish.Hooked(catchPoint);
+
+        audioManger.PlaySFX("Hooked_SFX");
     }
 
     public void OnFishEscape()
@@ -85,9 +95,11 @@ public class GameManager : MonoBehaviour
     {
         if (IsZapped)
             return;
-
+        
         playerAnim.SetTrigger("Zap");
         IsZapped = true;
+
+        audioManger.PlaySFX("Zap_SFX");
     }
 
     #region ANIM TRIGGERS

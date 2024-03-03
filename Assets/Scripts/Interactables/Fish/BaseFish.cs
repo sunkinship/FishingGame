@@ -23,7 +23,7 @@ public class BaseFish : MonoBehaviour
     [SerializeField] protected Animator anim;
 
     [Header("Other Settings")]
-    [SerializeField] protected float hookPointOffset;
+    [SerializeField] protected Vector2 hookPointOffset;
 
     protected Vector3 escapeDirection;
 
@@ -61,8 +61,8 @@ public class BaseFish : MonoBehaviour
         anim.SetTrigger("Hooked");
 
         //make the fish follow the lure with an offset 
-        transform.SetParent(catchPoint, false);
-        transform.localPosition = new Vector3(0, hookPointOffset, 0);
+        transform.SetParent(catchPoint);
+        transform.localPosition = (Vector3)hookPointOffset;
     }
 
     public virtual void Escape()

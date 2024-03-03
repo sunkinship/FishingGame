@@ -154,14 +154,15 @@ MonoBehaviour:
   moveLeft: 1
   moveSpeed: 0.2
   escapeSpeed: 15
-  waveStrength: 0.4
+  waveStrength: 0.3
   waveSpeed: 1
   sr: {fileID: 3450745857126494671}
   anim: {fileID: 3450745857126494512}
-  hookPointOffset: 0
+  hookPointOffset: {x: 0.1, y: 0}
   state: 0
   entryTime: 1
   rocketSpeed: 10
+  graphic: {fileID: 3450745857126494513}
 --- !u!61 &3450745858076051372
 BoxCollider2D:
   m_ObjectHideFlags: 0

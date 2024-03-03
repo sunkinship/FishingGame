@@ -126,7 +126,7 @@ MonoBehaviour:
   waveSpeed: 2
   sr: {fileID: 3381263662115300725}
   anim: {fileID: 3381263662115300723}
-  hookPointOffset: -0.5
+  hookPointOffset: {x: 0.1, y: -0.1}
   state: 0
 --- !u!61 &3381263662115300720
 BoxCollider2D:

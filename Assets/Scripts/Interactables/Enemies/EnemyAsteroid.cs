@@ -50,7 +50,7 @@ public class EnemyAsteroid : MonoBehaviour
             {
                 //only allow rock fish to escape if it has been shattered and this asteroid was not the one that shattered the rock
                 if (shatteredRock == false && rockFish.IsShattered)
-                    Manager.OnFishEscape();
+                    HitFish();
                 //if rock fish is not shattered yet, shatter it
                 else
                 {
@@ -63,9 +63,17 @@ public class EnemyAsteroid : MonoBehaviour
             {
                 //allow fish to escape
                 if (fish.state == BaseFish.FishState.hooked)
-                    Manager.OnFishEscape();
+                    HitFish();
+
+
             }         
         }     
+    }
+
+    private void HitFish()
+    {
+        AudioManager.Instance.PlaySFX("Hit_SFX");
+        Manager.OnFishEscape();
     }
 
     private void Rotate()
