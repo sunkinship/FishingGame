@@ -62,7 +62,7 @@ public class AudioManager : MonoBehaviour
             StartCoroutine(DestroySFX(audioSource));
     } 
 
-    private void CreateMusic(string name, AudioClip music, float volume = 1f)
+    private void CreateMusic(string name, AudioClip music, float volume = 1f, float fadeSpeed = 3f)
     {
         GameObject obj = new(name);
         obj.transform.SetParent(audioRoot);
@@ -70,11 +70,12 @@ public class AudioManager : MonoBehaviour
 
         audioSource.loop = true;
         audioSource.clip = music;
-        audioSource.volume = volume;
+        audioSource.volume = 0;
         
         allMusic.Add(audioSource);
 
         audioSource.Play();
+        StartCoroutine(FadeInMusic(audioSource, volume, fadeSpeed));
     }
 
     private IEnumerator DestroySFX(AudioSource sfx)
@@ -84,7 +85,7 @@ public class AudioManager : MonoBehaviour
         Destroy(sfx.gameObject);
     }
 
-    public void StopMusic(string name)
+    public void StopMusic(string name, float fadeSpeed = 3f)
     {
         AudioSource source = GetMusic(name);
 
@@ -92,7 +93,7 @@ public class AudioManager : MonoBehaviour
             return;
 
         allMusic.Remove(source);
-        Destroy(source.gameObject);
+        StartCoroutine(FadeOutMusic(source, fadeSpeed));
     }
 
     private AudioSource GetMusic(string name)
@@ -105,5 +106,24 @@ public class AudioManager : MonoBehaviour
 
         Debug.LogWarning($"Could not find music in scene called '{name}'");
         return null;
+    }
+
+    private IEnumerator FadeOutMusic(AudioSource source, float fadeSpeed = 3f)
+    {
+        while (source.volume > 0)
+        {
+            source.volume = Mathf.MoveTowards(source.volume, 0, fadeSpeed * Time.deltaTime);
+            yield return null;
+        }
+        Destroy(source.gameObject);
+    }
+
+    private IEnumerator FadeInMusic(AudioSource source, float fadeInVolume = 1f, float fadeSpeed = 3f)
+    {
+        while (source.volume < fadeInVolume)
+        {
+            source.volume = Mathf.MoveTowards(source.volume, fadeInVolume, fadeSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 }

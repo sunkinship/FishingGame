@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class BaseFish : MonoBehaviour
 {
-    protected const float MIN_ESCAPE_ANGLE = 45;
-    protected const float MID_ESCAPE_ANGLE = 90;
-    protected const float MAX_ESCAPE_ANGLE = 135;
+    protected const float MIN_ESCAPE_ANGLE_LEFT = 45;
+    protected const float MAX_ESCAPE_ANGLE_LEFT = 90;
+    protected const float MAX_ESCAPE_ANGLE_RIGHT = -45;
+    protected const float MIN_ESCAPE_ANGLE_RIGHT = -90;
     protected const float TARGET_ESCAPE_X = 135;
 
     [Header("Movement Settings")]
@@ -99,12 +100,15 @@ public class BaseFish : MonoBehaviour
         //make fish face random direction 
         float angle;
         if (moveLeft)
-            angle = Random.Range(MIN_ESCAPE_ANGLE, MID_ESCAPE_ANGLE);
+            angle = Random.Range(MIN_ESCAPE_ANGLE_LEFT, MAX_ESCAPE_ANGLE_LEFT);
         else
-            angle = Random.Range(MID_ESCAPE_ANGLE, MAX_ESCAPE_ANGLE);
+            angle = Random.Range(MIN_ESCAPE_ANGLE_RIGHT, MAX_ESCAPE_ANGLE_RIGHT);
 
         transform.rotation = Quaternion.Euler(0, 0, angle);
         escapeDirection = new Vector3(Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad), 0f);
+
+        if (moveLeft == false)
+            escapeDirection *= -1;
     }
 
     //fish swims away towards random angle downward

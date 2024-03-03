@@ -173,7 +173,7 @@ MonoBehaviour:
   anim: {fileID: 3450745857126494512}
   hookPointOffset: {x: 0.1, y: 0}
   state: 0
-  entryTime: 1
+  entryTime: 1.6
   rocketSpeed: 10
   graphic: {fileID: 3450745857126494513}
 --- !u!61 &3450745858076051372
