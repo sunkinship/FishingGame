@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: cb750763650d6004a922d7c49e1924b3
+  - enabled: 1
+    path: Assets/Scenes/Fishing.unity
+    guid: 02724c65e5d91aa419e87154e9d1815f
   m_configObjects: {}
