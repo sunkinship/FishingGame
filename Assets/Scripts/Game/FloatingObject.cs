@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundAsteroid : MonoBehaviour
+public class FloatingObject : MonoBehaviour
 {
+    [Header("Rotation Settings")]
     [SerializeField] private bool rotateLeft;
     [SerializeField] private float rotationSpeed;
+
+    [Header("Wave Settings")]
     [SerializeField] private float waveStrength;
     [SerializeField] private float waveSpeed;  
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EntityMovement 
 {
-    private float moveSpeed;
-    private float waveStrength;
-    private float waveSpeed;
+    public float moveSpeed;
+    public float waveStrength;
+    public float waveSpeed;
 
     private SpriteRenderer sr;
     private Transform transform;
