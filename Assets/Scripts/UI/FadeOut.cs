@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FadeOut : MonoBehaviour
 {
-
     public CanvasGroup canvasGroup;
+
     public bool fadeIn = false;
     public bool fadeOut = false;
 
     public float timeToFade;
-    // Update is called once per frame
+
     void Update()
     {
         if(fadeIn == true)
@@ -37,9 +37,7 @@ public class FadeOut : MonoBehaviour
                     fadeOut = false;
                 }
             }
-        }
-
-        
+        }       
     }
 
     public void FadeIn()

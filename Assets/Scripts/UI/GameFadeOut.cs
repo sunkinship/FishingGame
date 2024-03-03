@@ -22,7 +22,6 @@ public class GameFadeOut : MonoBehaviour
         {
             if (canvasGroup.alpha >= 0)
             {
-
                 canvasGroup.alpha -= timeToFade * Time.deltaTime;
 
                 if (canvasGroup.alpha == 0)
@@ -32,7 +31,6 @@ public class GameFadeOut : MonoBehaviour
             }
         }
     }
-
 
     public IEnumerator FadeOut()
     {

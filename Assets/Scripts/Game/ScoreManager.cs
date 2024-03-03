@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         if (scoreText != null)
-            scoreText.text = score.ToString();
+            scoreText.text = "Score : " + score;
     }
 
     public void AddScore(BaseFish fish)
@@ -42,6 +42,6 @@ public class ScoreManager : MonoBehaviour
             score++;
 
         if (scoreText != null)
-            scoreText.text = score.ToString();
+            scoreText.text = "Score : " + score;
     }
 }

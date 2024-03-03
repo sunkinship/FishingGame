@@ -88,6 +88,7 @@ public class SpawnManager : MonoBehaviour
             else if (currentStage == 3)
             {
                 Debug.Log("Enter Stage 4 (stop for tutorial)");
+                SpawnRockFishTutorial();
                 normalFishEnabled = false;
                 asteroidEnabled = false;
                 rocketFishEnabled = false;
@@ -101,7 +102,7 @@ public class SpawnManager : MonoBehaviour
                 rockFishEnabled = true;
                 rockFishSpawnInterval = 4;
                 asteroidEnabled = true;
-                asteroidSpawnInterval = 2;
+                asteroidSpawnInterval = 3;
                 currentStage++;
             }
             else if (currentStage == 5)
