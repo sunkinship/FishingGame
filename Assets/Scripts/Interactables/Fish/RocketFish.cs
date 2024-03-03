@@ -79,5 +79,8 @@ public class RocketFish : BaseFish
     {
         base.Escape();
         graphic.localPosition = ogOffset;
+
+        if (moveLeft == false)
+            sr.flipX = true;
     }
 }
