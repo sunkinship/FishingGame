@@ -42,8 +42,9 @@ public class GameManager : MonoBehaviour
         {
             playerAnim.SetTrigger("Yay");
             playingYayAnim = true;
-        } 
+        }
 
+        HookedRockFish = false;
         Destroy(currentFish.gameObject);
 
         audioManger.PlaySFX("Yay_SFX");

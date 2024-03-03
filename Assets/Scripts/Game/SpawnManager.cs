@@ -21,6 +21,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject asteroid;
     [SerializeField] private GameObject jellyfish;
 
+    [Header("Tutorial")]
+    [SerializeField] private GameObject tutorial;
+
     private float timer = 0;
     private int currentStage = 0;
 
@@ -62,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         if (timer > eventTimeStamps[currentStage])
         {
             if (currentStage == 0)
-            {
+            {             
                 Debug.Log("Enter Stage 1");
                 normalFishEnabled = true;
                 astroidEnabled = true;
@@ -70,7 +73,7 @@ public class SpawnManager : MonoBehaviour
             }
             else if (currentStage == 1)
             {
-                Debug.Log("Enter Stage 2 (rocket)");
+                Debug.Log("Enter Stage 2 (add rocket)");
                 SpawnRocketFish();
                 rocketFishEnabled = true;
                 currentStage++;
@@ -88,28 +91,37 @@ public class SpawnManager : MonoBehaviour
                 normalFishEnabled = false;
                 astroidEnabled = false;
                 rocketFishEnabled = false;
-                currentStage += 2;
+                currentStage++;
+            }
+            else if (currentStage == 4)
+            {
+                Debug.Log("Enter Stage 6 (rock spawns for tutorial)");
+                SpawnRockFish();
+                SpawnAsteroid();
+                rockFishEnabled = true;
+                rockFishSpawnInterval = 4;
+                astroidEnabled = true;
+                asteroidSpawnInterval = 2;
             }
             else if (currentStage == 5)
             {
-                Debug.Log("Enter Stage 6 (rock)");
-                SpawnRockFish();
+                Debug.Log("Enter Stage 6 (spawn everyone again)");             
                 normalFishSpawnInterval = 4;
                 asteroidSpawnInterval = 4.5f;
+                rockFishSpawnInterval = 9;
                 normalFishEnabled = true;
                 astroidEnabled = true;
                 rocketFishEnabled = true;
-                rockFishEnabled = true;
                 currentStage++;
             }
             else if (currentStage == 6)
             {
-                Debug.Log("Enter Stage 7 (jelly)");
+                Debug.Log("Enter Stage 7 (add jelly)");
                 SpawnJellyfish();
                 normalFishSpawnInterval = 3;
                 asteroidSpawnInterval = 4f;
                 rocketFishSpawnInterval = 7;
-                rockFishSpawnInterval = 9;
+                rockFishSpawnInterval = 8;
                 jellyfishEnabled = true;
                 currentStage++;
             }
@@ -324,6 +336,12 @@ public class SpawnManager : MonoBehaviour
         baseFish.Initialize(moveLeft, RockFishValues.moveSpeed, RockFishValues.waveStrength, RockFishValues.waveSpeed);
     }
     #endregion
+
+    private void SpawnRockFishTutorial()
+    {
+        GameObject obj = Instantiate(tutorial);
+        obj.transform.position = new(13.94f , - 1.15f);
+    }
 
     private enum FishType { normal, rocket, rock }
 

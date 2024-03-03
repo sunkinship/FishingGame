@@ -76,6 +76,7 @@ public class FishingController : MonoBehaviour
 
     private void MouseButtonPressed()
     {
+        //catch
         if (Input.GetMouseButtonDown(0))
         {
             //if not fish is caught, cannot catch or release
@@ -83,10 +84,18 @@ public class FishingController : MonoBehaviour
                 return;
 
             //if lure is above threshold, catch fish
-            if (movePoint.position.y > CATCH_THRESHOLD)
+            if (movePoint.position.y >= CATCH_THRESHOLD)
                 GameManager.Instance.OnCatchConfirm();
+        }
+        //release
+        if (Input.GetMouseButtonDown(1))
+        {
+            //if not fish is caught, cannot catch or release
+            if (GameManager.Instance.IsFishCaught == false)
+                return;
+
             //if lure is below threshold, release fish
-            else
+            if (movePoint.position.y < CATCH_THRESHOLD)
                 GameManager.Instance.OnFishRelease();
         }
     }

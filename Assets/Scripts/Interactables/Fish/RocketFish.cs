@@ -17,10 +17,10 @@ public class RocketFish : BaseFish
     {
         base.Start();
 
-        ogOffset = graphic.localPosition;
-
         if (moveLeft == false)
             SetRocketRight();
+
+        ogOffset = graphic.localPosition;
 
         StartCoroutine(EntryAndCountdown());
     }
@@ -42,6 +42,7 @@ public class RocketFish : BaseFish
     {
         anim.SetTrigger("Right");
         sr.flipX = false; //undo the flipping that the move script does since the rocket fish has its own right sprite 
+        graphic.localPosition = new(-0.9f, 0, 0);
     }
 
     private IEnumerator EntryAndCountdown()
