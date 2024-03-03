@@ -18,4 +18,10 @@ public class RockFish : BaseFish
         base.Hooked(catchPoint);
         GameManager.Instance.HookedRockFish = true;
     }
+
+    public override void Escape()
+    {
+        base.Escape();
+        GameManager.Instance.HookedRockFish = false;
+    }
 }

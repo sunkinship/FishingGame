@@ -13,6 +13,14 @@ public class RocketFish : BaseFish
     protected override void Start()
     {
         base.Start();
+
+        if (moveLeft == false)
+        {
+            anim.SetTrigger("Right");
+            sr.flipX = false; //undo the flipping that the move script does since the rocket fish has its own right sprite 
+        }
+            
+
         StartCoroutine(EntryAndCountdown());
     }
 
@@ -34,7 +42,7 @@ public class RocketFish : BaseFish
     //set speed to rocket speed when firing  
     private void SetToRocket()
     {
-        swimController.moveSpeed = rocketSpeed;
+        swimController.moveSpeed = moveLeft ? rocketSpeed : -rocketSpeed;
         swimController.waveSpeed = 0;
         swimController.waveStrength = 0;
     }
