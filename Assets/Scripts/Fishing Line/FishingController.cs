@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineController : MonoBehaviour
+public class FishingController : MonoBehaviour
 {
+    public const float CATCH_THRESHOLD = 2.4f;
+
     [SerializeField] private Transform movePoint, minPosition, maxPosition;
     [SerializeField] private FishingLine fishingLine;
     private float mouseYPos;
@@ -16,8 +18,12 @@ public class LineController : MonoBehaviour
 
     private void Update()
     {
+        //update mouse position
         mouseYPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+        //move fishing line
         ControlLine();
+        //check for mouse input
+        MouseButtonPressed();
     }
 
     private void ControlLine()
@@ -51,5 +57,22 @@ public class LineController : MonoBehaviour
     {
         float mouseHeight = mouseYPos;
         return mouseHeight < maxPosition.position.y;
+    }
+
+    private void MouseButtonPressed()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //if not fish is caught, cannot catch or release
+            if (GameManager.Instance.IsFishCaught == false)
+                return;
+
+            //if lure is above threshold, catch fish
+            if (movePoint.position.y > CATCH_THRESHOLD)
+                GameManager.Instance.OnCatchConfirm();
+            //if lure is below threshold, release fish
+            else
+                GameManager.Instance.OnFishRelease();
+        }
     }
 }

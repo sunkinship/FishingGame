@@ -6,7 +6,7 @@ public class RocketFish : BaseFish
 {
     private const float COUNTDOWN_TIME = 3;
 
-    [Header("Rocket Settings")]
+    [Header("Rocket Fish Settings")]
     [SerializeField] private float entryTime;
     [SerializeField] private float rocketSpeed;
     [SerializeField] private Animator anim;

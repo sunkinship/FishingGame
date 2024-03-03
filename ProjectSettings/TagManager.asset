@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fish
   - Line
+  - Asteroid
   layers:
   - Default
   - TransparentFX

@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator playerAnim;
     [SerializeField] Transform catchPoint;
 
-    private BaseFish currentFish = null;
+    [HideInInspector] public BaseFish currentFish = null;
     public bool IsFishCaught => currentFish != null;
 
     public bool IsZapped {  get; private set; }
     public bool CannotCatchFish => IsFishCaught || IsZapped;
+
+    private bool playingYayAnim, playingLostAnim;
 
 
     private void Awake()
@@ -23,30 +25,54 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void OnFishCaught(BaseFish fish)
+    public void OnCatchConfirm()
     {
-        if (fish != null)
+        if (IsFishCaught == false)
+            return;
+
+        if (!playingYayAnim)
         {
-            currentFish = fish;
-            currentFish.Caught(catchPoint);
-        }      
+            playerAnim.SetTrigger("Yay");
+            playingYayAnim = true;
+        }
+
+        Destroy(currentFish.gameObject);
+    }
+
+    public void OnFishHooked(BaseFish fish)
+    {
+        if (fish == null) 
+            return;
+
+        currentFish = fish;
+        currentFish.Hooked(catchPoint);
     }
 
     public void OnFishEscape()
     {
-        if (IsFishCaught)
-        {
-            currentFish.Escape();
+        if (IsFishCaught == false)
+            return;
 
-            //only player lost animation if not being zapped as to not override zap animation
-            if (IsZapped == false)
-                playerAnim.SetTrigger("Lost");
-        }
-            
+        currentFish.Escape();
+
+        //only play lost animation if not being zapped and not already playing lost anim as to not override zap animation
+        if (IsZapped == false && playingLostAnim == false)
+            playerAnim.SetTrigger("Lost");
+    }
+
+    public void OnFishRelease()
+    {
+        if (IsFishCaught == false)
+            return;
+
+        currentFish.Escape();
     }
 
     public void OnPlayerZap()
     {
+        if (IsZapped)
+            return;
+
         playerAnim.SetTrigger("Zap");
         IsZapped = true;
         StartCoroutine(ZapTimer());
@@ -57,4 +83,21 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(ZAP_TIME);
         IsZapped = false;
     }
+
+    #region ANIM TRIGGERS
+    public void EndZapAnim()
+    {
+        IsZapped = false;
+    }
+
+    public void EndLostAnim()
+    {
+        playingLostAnim = false;
+    }
+
+    public void EndYayAnim()
+    {
+        playingYayAnim = false;
+    }
+    #endregion
 }

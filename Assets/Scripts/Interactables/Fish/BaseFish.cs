@@ -21,11 +21,11 @@ public class BaseFish : MonoBehaviour
     [SerializeField] protected SpriteRenderer sr;
 
     [Header("Other Settings")]
-    [SerializeField] protected float catchPointOffset;
+    [SerializeField] protected float hookPointOffset;
 
     protected Vector3 escapeDirection;
 
-    public enum FishState { swim, caught, escaped }
+    public enum FishState { swim, hooked, escaped }
     [HideInInspector] public FishState state = FishState.swim;   
 
     protected EntityMovement swimController;
@@ -43,26 +43,23 @@ public class BaseFish : MonoBehaviour
             SwimAway();
     }
 
-    //makes fish swim until state is changed 
     protected virtual void Swim()
     {
         swimController?.Move();
     }
 
-    //gets called by fish line when it touches this fish
-    public void Caught(Transform catchPoint)
+    public void Hooked(Transform catchPoint)
     {
-        if (state == FishState.caught)
+        if (state == FishState.hooked)
             return;
 
-        state = FishState.caught;
+        state = FishState.hooked;
 
         //make the fish follow the lure with an offset 
         transform.SetParent(catchPoint, false);
-        transform.localPosition = new Vector3(0, catchPointOffset, 0);
+        transform.localPosition = new Vector3(0, hookPointOffset, 0);
     }
 
-    //gets called by enemy if it touches this fish
     public void Escape()
     {
         if (state == FishState.escaped)

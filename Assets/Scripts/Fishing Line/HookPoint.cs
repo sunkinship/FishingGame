@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatchPoint : MonoBehaviour
+public class HookPoint : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,7 +12,7 @@ public class CatchPoint : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Fish"))
         {
-            GameManager.Instance.OnFishCaught(collision.gameObject.GetComponent<BaseFish>());
+            GameManager.Instance.OnFishHooked(collision.gameObject.GetComponent<BaseFish>());
         }
     }
 }

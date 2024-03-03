@@ -39,7 +39,7 @@ public class EnemyAsteroid : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Fish"))
         {
-            if (collision.gameObject.GetComponent<BaseFish>().state == BaseFish.FishState.caught)
+            if (collision.gameObject.GetComponent<BaseFish>().state == BaseFish.FishState.hooked)
                 GameManager.Instance.OnFishEscape();
         }          
     }
