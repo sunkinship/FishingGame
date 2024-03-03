@@ -5,6 +5,7 @@ using UnityEngine;
 public class BaseFish : MonoBehaviour
 {
     protected const float MIN_ESCAPE_ANGLE = 45;
+    protected const float MID_ESCAPE_ANGLE = 90;
     protected const float MAX_ESCAPE_ANGLE = 135;
     protected const float TARGET_ESCAPE_X = 135;
 
@@ -64,7 +65,7 @@ public class BaseFish : MonoBehaviour
         transform.localPosition = new Vector3(0, hookPointOffset, 0);
     }
 
-    public void Escape()
+    public virtual void Escape()
     {
         if (state == FishState.escaped)
             return;
@@ -78,7 +79,12 @@ public class BaseFish : MonoBehaviour
         transform.SetParent(null);
 
         //make fish face random direction 
-        float angle = Random.Range(MIN_ESCAPE_ANGLE, MAX_ESCAPE_ANGLE);
+        float angle;
+        if (moveLeft)
+            angle = Random.Range(MIN_ESCAPE_ANGLE, MID_ESCAPE_ANGLE);
+        else
+            angle = Random.Range(MID_ESCAPE_ANGLE, MAX_ESCAPE_ANGLE);
+
         transform.rotation = Quaternion.Euler(0, 0, angle);
         escapeDirection = new Vector3(Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad), 0f);
     }

@@ -157,11 +157,11 @@ MonoBehaviour:
   waveStrength: 0.4
   waveSpeed: 1
   sr: {fileID: 3450745857126494671}
-  catchPointOffset: -0.5
+  anim: {fileID: 3450745857126494512}
+  hookPointOffset: 0
   state: 0
   entryTime: 1
   rocketSpeed: 10
-  anim: {fileID: 3450745857126494512}
 --- !u!61 &3450745858076051372
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rocket_Fish_Neutral
+  m_Name: Rocket_Fish_Fire_Right
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 54db47be7a84a024787d71e73ce6b4f7, type: 3}
-    - time: 1
-      value: {fileID: 21300000, guid: 54db47be7a84a024787d71e73ce6b4f7, type: 3}
+      value: {fileID: -1966565881, guid: a9dbadaf4ead90f40a9e7f1115f120dd, type: 3}
+    - time: 0.06666667
+      value: {fileID: -290548986, guid: a9dbadaf4ead90f40a9e7f1115f120dd, type: 3}
+    - time: 0.11666667
+      value: {fileID: -722605227, guid: a9dbadaf4ead90f40a9e7f1115f120dd, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,14 +44,15 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 54db47be7a84a024787d71e73ce6b4f7, type: 3}
-    - {fileID: 21300000, guid: 54db47be7a84a024787d71e73ce6b4f7, type: 3}
+    - {fileID: -1966565881, guid: a9dbadaf4ead90f40a9e7f1115f120dd, type: 3}
+    - {fileID: -290548986, guid: a9dbadaf4ead90f40a9e7f1115f120dd, type: 3}
+    - {fileID: -722605227, guid: a9dbadaf4ead90f40a9e7f1115f120dd, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0166667
+    m_StopTime: 0.13333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
