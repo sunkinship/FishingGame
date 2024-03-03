@@ -27,6 +27,10 @@ public class FishingController : MonoBehaviour
         //update mouse position
         mouseYPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
 
+        //cannot move fishing line if zapped
+        if (GameManager.Instance.IsZapped)
+            return;
+
         //move fishing line
         if (GameManager.Instance.HookedRockFish == false)
             ControlLine();

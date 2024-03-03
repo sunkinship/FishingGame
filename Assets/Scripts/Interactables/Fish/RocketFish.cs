@@ -17,17 +17,32 @@ public class RocketFish : BaseFish
     {
         base.Start();
 
+        ogOffset = graphic.localPosition;
+
+        if (moveLeft == false)
+            SetRocketRight();
+
+        StartCoroutine(EntryAndCountdown());
+    }
+
+    public override void Initialize(bool moveLeft, float moveSpeed, float waveStrength, float waveSpeed)
+    {
+        base.Initialize(moveLeft, moveSpeed, waveStrength, waveSpeed);
+
         //save the sprite's offset so the position can be restored when escaping since the position is lost when caught to account for the centered struggle animation 
         ogOffset = graphic.localPosition;
 
         if (moveLeft == false)
-        {
-            anim.SetTrigger("Right");
-            sr.flipX = false; //undo the flipping that the move script does since the rocket fish has its own right sprite 
-        }           
+            SetRocketRight();
 
-        StartCoroutine(EntryAndCountdown());
-    } 
+        StartCoroutine(EntryAndCountdown());       
+    }
+
+    public void SetRocketRight()
+    {
+        anim.SetTrigger("Right");
+        sr.flipX = false; //undo the flipping that the move script does since the rocket fish has its own right sprite 
+    }
 
     private IEnumerator EntryAndCountdown()
     {

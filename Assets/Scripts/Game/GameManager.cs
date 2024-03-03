@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        audioManger.PlayMusic("Space Fishin'");
+        audioManger.PlayMusic("Space Fishin\'", 0.6f);
     }
 
     public void OnCatchConfirm()
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         currentFish = fish;
         currentFish.Hooked(catchPoint);
 
-        audioManger.PlaySFX("Hooked_SFX");
+        audioManger.PlaySFX("Hooked_SFX", 0.7f);
     }
 
     public void OnFishEscape()
@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
         if (currentFish is RockFish rockFish)
         {
             rockFish.Shatter();
+            audioManger.PlaySFX("Rock_Break_SFX");
         }
     }
 

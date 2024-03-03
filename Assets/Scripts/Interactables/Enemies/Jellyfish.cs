@@ -24,6 +24,16 @@ public class Jellyfish : MonoBehaviour
         moveController = new(moveLeft, moveSpeed, waveStrength, waveSpeed, sr, transform);
     }
 
+    public virtual void Initialize(bool moveLeft, float moveSpeed, float waveStrength, float waveSpeed)
+    {
+        this.moveLeft = moveLeft;
+        this.moveSpeed = moveSpeed;
+        this.waveStrength = waveStrength;
+        this.waveSpeed = waveSpeed;
+
+        moveController = new(this.moveLeft, this.moveSpeed, this.waveStrength, this.waveSpeed, sr, transform);
+    }
+
     private void FixedUpdate()
     {
         moveController.Move();

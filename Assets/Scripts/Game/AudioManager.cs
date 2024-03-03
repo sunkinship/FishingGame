@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -28,13 +27,21 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(string music, float volume = 1f)
     {
-        AudioClip clip = LoadClip(music, true);
+        AudioClip clip = LoadClip(music, false);
         CreateMusic(music, clip, volume);
     }
 
     private AudioClip LoadClip(string name, bool isSFX)
     {
-        return Resources.Load<AudioClip>((isSFX ? SFX_PATH : MUSIC_PATH) + name);
+        AudioClip clip = Resources.Load<AudioClip>((isSFX ? SFX_PATH : MUSIC_PATH) + name);
+
+        if (clip != null)
+            return clip;
+        else
+        {
+            Debug.LogError($"Could not load audio clip from path '{(isSFX ? SFX_PATH : MUSIC_PATH) + name}'.");
+            return null;
+        }
     }
 
     private void CreateSFX(string name, AudioClip clip, float volume = 1f)
@@ -74,7 +81,7 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(sfx.clip.length + 1);
         allSFX.Remove(sfx);
-        Destroy(sfx);
+        Destroy(sfx.gameObject);
     }
 
     public void StopMusic(string name)
@@ -85,7 +92,7 @@ public class AudioManager : MonoBehaviour
             return;
 
         allMusic.Remove(source);
-        Destroy(source);
+        Destroy(source.gameObject);
     }
 
     private AudioSource GetMusic(string name)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseFish : MonoBehaviour
@@ -30,7 +31,9 @@ public class BaseFish : MonoBehaviour
     public enum FishState { swim, hooked, escaped }
     [HideInInspector] public FishState state = FishState.swim;   
 
-    protected EntityMovement swimController;
+    public EntityMovement swimController;
+
+    protected bool initialized = true;
 
     protected virtual void Start()
     {
@@ -39,10 +42,25 @@ public class BaseFish : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (initialized == false)
+            return;
+
         if (state == FishState.swim)
             Swim();
         else if (state == FishState.escaped)
             SwimAway();
+    }
+
+    public virtual void Initialize(bool moveLeft, float moveSpeed, float waveStrength, float waveSpeed)
+    {
+        this.moveLeft = moveLeft;
+        this.moveSpeed = moveSpeed;
+        this.waveStrength = waveStrength;
+        this.waveSpeed = waveSpeed;
+
+        swimController = new(this.moveLeft, this.moveSpeed, this.waveStrength, this.waveSpeed, sr, transform);
+
+        initialized = true;
     }
 
     protected virtual void Swim()
