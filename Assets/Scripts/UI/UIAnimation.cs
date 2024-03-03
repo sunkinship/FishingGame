@@ -13,15 +13,12 @@ public class UIAnimation : MonoBehaviour
 
     private int indexSprite;
     Coroutine coroutineAnim;
-    bool hasRun = false;
+    
     bool isDone = false;
-    private void Update()
+
+    private void Start()
     {
-        if(hasRun == false)
-        {
-            StartCoroutine(PlayAnim());
-        }
-        
+        StartCoroutine(PlayAnim());
     }
 
     IEnumerator PlayAnim()
@@ -30,7 +27,7 @@ public class UIAnimation : MonoBehaviour
         yield return new WaitForSeconds(speed);
 
 
-        hasRun = true;
+       
 
         if (indexSprite >= ui_spriteArray.Length)
         {
