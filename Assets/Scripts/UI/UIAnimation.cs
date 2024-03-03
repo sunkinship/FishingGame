@@ -12,9 +12,9 @@ public class UIAnimation : MonoBehaviour
     public float speed = 0.2f;
 
     private int indexSprite;
-
+    Coroutine coroutineAnim;
     bool hasRun = false;
-
+    bool isDone = false;
     private void Update()
     {
         if(hasRun == false)
@@ -38,6 +38,10 @@ public class UIAnimation : MonoBehaviour
         }
         ui_Image.sprite = ui_spriteArray[indexSprite];
         indexSprite += 1;
-       
+        if (isDone == false)
+        {
+            coroutineAnim = StartCoroutine(PlayAnim());
+        }
+
     }
 }
