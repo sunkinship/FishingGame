@@ -85,7 +85,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8475842877381028443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,9 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724b68d0dac86864593d856416f70d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
-  waveStrength: 0.1
-  waveSpeed: 0.5
+  moveSpeed: 0.145
+  waveStrength: 0.5
+  waveSpeed: 1.5
 --- !u!1 &8475842877706115444
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +184,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial Text Here
+  m_text: "To break a rock fish, one must break tradition. \n\nSmash the rock fish
+    against a rock and reel in that beautiful diamond fish!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08054d1895d380540b59becbe2ee3ada, type: 2}
   m_sharedMaterial: {fileID: -1795790216888645214, guid: 08054d1895d380540b59becbe2ee3ada, type: 2}
@@ -211,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.25
+  m_fontSizeBase: 0.25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -221,8 +222,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: 10
+  m_wordSpacing: 15
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0

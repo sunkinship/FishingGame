@@ -250,8 +250,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui_Image: {fileID: 132982567}
   ui_spriteArray:
-  - {fileID: -1564692431, guid: e4f93758dbd78974f828c08885d4da54, type: 3}
-  - {fileID: 1706463690, guid: e4f93758dbd78974f828c08885d4da54, type: 3}
+  - {fileID: 1725450897, guid: 8b47376f9663d3449a416619ed2ef7a9, type: 3}
+  - {fileID: 1725450897, guid: 8b47376f9663d3449a416619ed2ef7a9, type: 3}
   speed: 1
 --- !u!114 &132982567
 MonoBehaviour:
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d5ae2e45f67d0344aee34c0e0204e5a, type: 3}
+  m_Sprite: {fileID: 1725450897, guid: 8b47376f9663d3449a416619ed2ef7a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1083,7 +1083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.313, y: 471}
+  m_AnchoredPosition: {x: 15.313, y: 383}
   m_SizeDelta: {x: 435.6478, y: 72.3458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760347277
@@ -1122,11 +1122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome to the Space Fishin'' tutorial!
-
-
-    here you will learn all
-    the basics of fishing in outer space!'
+  m_text: You did It!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08054d1895d380540b59becbe2ee3ada, type: 2}
   m_sharedMaterial: {fileID: -1795790216888645214, guid: 08054d1895d380540b59becbe2ee3ada, type: 2}
