@@ -26,9 +26,11 @@ public class UIAnimation : MonoBehaviour
 
     IEnumerator PlayAnim()
     {
-        hasRun = true;
 
         yield return new WaitForSeconds(speed);
+
+
+        hasRun = true;
 
         if (indexSprite >= ui_spriteArray.Length)
         {

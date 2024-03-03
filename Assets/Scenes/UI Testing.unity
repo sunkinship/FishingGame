@@ -812,7 +812,7 @@ MonoBehaviour:
   ui_spriteArray:
   - {fileID: -1147351839, guid: f476c18d1b6409c4cbb8cab3517fe844, type: 3}
   - {fileID: -1560870052, guid: f476c18d1b6409c4cbb8cab3517fe844, type: 3}
-  speed: 2
+  speed: 0.1
 --- !u!1 &532048908
 GameObject:
   m_ObjectHideFlags: 0
