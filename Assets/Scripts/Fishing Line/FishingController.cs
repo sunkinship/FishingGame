@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishingController : MonoBehaviour
 {
-    public const float CATCH_THRESHOLD = 2.4f;
+    public const float CATCH_THRESHOLD = 2.2f;
 
     [SerializeField] private Transform movePoint, minPosition, maxPosition;
     [SerializeField] private FishingLine fishingLine;
@@ -28,7 +28,7 @@ public class FishingController : MonoBehaviour
         mouseYPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
 
         //cannot move fishing line if zapped
-        if (GameManager.Instance.IsZapped)
+        if (GameManager.Instance.IsZapped || PauseMenu.paused)
             return;
 
         //move fishing line

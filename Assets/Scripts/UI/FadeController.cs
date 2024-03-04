@@ -4,12 +4,48 @@ using UnityEngine;
 
 public class FadeController : MonoBehaviour
 {
-    FadeOut fade;
+    public CanvasGroup canvasGroup;
 
-    void Start()
+    public bool fadeIn = false;
+    public bool fadeOut = false;
+
+    public float timeToFade;
+
+    void Update()
     {
-       fade = FindObjectOfType<FadeOut>();
+        if(fadeIn == true)
+        {
+            if(canvasGroup.alpha < 1)
+            {
+                canvasGroup.alpha += timeToFade * Time.deltaTime;
+                if(canvasGroup.alpha >= 1)
+                {
+                    fadeIn = false;
+                }
+            }
+        }
 
-        fade.FadeIn();
+        if (fadeOut == true)
+        {
+            if (canvasGroup.alpha >= 0)
+            {
+                canvasGroup.alpha -= timeToFade * Time.deltaTime;
+                
+                if (canvasGroup.alpha == 0)
+                {
+                    fadeOut = false;
+                }
+            }
+        }       
+    }
+
+    public void FadeIn()
+    {
+        fadeIn = true;
+    }
+
+    public void FadeOut()
+    {
+        fadeOut = true;  
     }
 }

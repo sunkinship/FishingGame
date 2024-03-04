@@ -34,6 +34,8 @@ public class BaseFish : MonoBehaviour
 
     public EntityMovement swimController;
 
+    public bool escaped;
+
     protected bool initialized = true;
 
     protected virtual void Start()
@@ -90,6 +92,10 @@ public class BaseFish : MonoBehaviour
             return;
 
         state = FishState.escaped;
+
+        escaped = true;
+
+        Destroy(GetComponent<Collider2D>());
 
         //play swimming animation
         anim.SetTrigger("Escaped");

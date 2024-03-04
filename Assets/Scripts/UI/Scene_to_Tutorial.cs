@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 public class Scene_to_Tutorial : MonoBehaviour
 {
 
-    FadeOut fade;
+    FadeController fade;
 
     private void Start()
     {
-        fade = FindObjectOfType<FadeOut>();
+        fade = FindObjectOfType<FadeController>();
     }
 
     public IEnumerator ChangeScene()
     {
-        fade.FadeeOut();
+        fade.FadeOut();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Tutorial");
 

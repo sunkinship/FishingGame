@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Transform audioRoot;
 
     private List<AudioSource> allSFX = new();
-    private List<AudioSource> allMusic = new();
+    private AudioSource currentMusic;
 
     private void Awake()
     {
@@ -29,6 +29,11 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip clip = LoadClip(music, false);
         CreateMusic(music, clip, volume);
+    }
+
+    public void PlayMusic(AudioClip clip , float volume = 1f)
+    {
+        CreateMusic(clip.name, clip, volume);
     }
 
     private AudioClip LoadClip(string name, bool isSFX)
@@ -70,12 +75,11 @@ public class AudioManager : MonoBehaviour
 
         audioSource.loop = true;
         audioSource.clip = music;
-        audioSource.volume = 0;
-        
-        allMusic.Add(audioSource);
+        audioSource.volume = volume;
+
+        currentMusic = audioSource;
 
         audioSource.Play();
-        StartCoroutine(FadeInMusic(audioSource, volume, fadeSpeed));
     }
 
     private IEnumerator DestroySFX(AudioSource sfx)
@@ -85,45 +89,28 @@ public class AudioManager : MonoBehaviour
         Destroy(sfx.gameObject);
     }
 
-    public void StopMusic(string name, float fadeSpeed = 3f)
+    public void StopMusic(float fadeSpeed = 3f)
     {
-        AudioSource source = GetMusic(name);
-
-        if (source == null)
+        if (currentMusic == null)
             return;
 
-        allMusic.Remove(source);
-        StartCoroutine(FadeOutMusic(source, fadeSpeed));
+        Destroy(currentMusic.gameObject);
+        currentMusic = null;
     }
 
-    private AudioSource GetMusic(string name)
+    public void ResumeMusic()
     {
-        foreach (var clip in allMusic)
-        {
-            if (name == clip.name)
-                return clip;
-        }
+        if (currentMusic == null)
+            return;
 
-        Debug.LogWarning($"Could not find music in scene called '{name}'");
-        return null;
+        currentMusic.Play();
     }
 
-    private IEnumerator FadeOutMusic(AudioSource source, float fadeSpeed = 3f)
+    public void PauseMusic()
     {
-        while (source.volume > 0)
-        {
-            source.volume = Mathf.MoveTowards(source.volume, 0, fadeSpeed * Time.deltaTime);
-            yield return null;
-        }
-        Destroy(source.gameObject);
-    }
+        if (currentMusic == null)
+            return;
 
-    private IEnumerator FadeInMusic(AudioSource source, float fadeInVolume = 1f, float fadeSpeed = 3f)
-    {
-        while (source.volume < fadeInVolume)
-        {
-            source.volume = Mathf.MoveTowards(source.volume, fadeInVolume, fadeSpeed * Time.deltaTime);
-            yield return null;
-        }
+        currentMusic.Pause();
     }
 }

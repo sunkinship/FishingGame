@@ -5,12 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ResultsToTitle : MonoBehaviour
 {
-    FadeOut fade;
-
-    private void Start()
-    {
-        fade = FindObjectOfType<FadeOut>();
-    }
+    [SerializeField] private FadeController fade;
 
     private void Update()
     {
@@ -20,9 +15,10 @@ public class ResultsToTitle : MonoBehaviour
         }
     }
 
-    public IEnumerator ChangeScene()
+    private IEnumerator ChangeScene()
     {
-        fade.FadeeOut();
+        fade.FadeOut();
+        AudioManager.Instance.StopMusic();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("TitleScreen");
 

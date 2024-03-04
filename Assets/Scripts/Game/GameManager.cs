@@ -58,6 +58,9 @@ public class GameManager : MonoBehaviour
         if (fish == null) 
             return;
 
+        if (fish.escaped)
+            return;
+
         currentFish = fish;
         currentFish.Hooked(catchPoint);
 
@@ -68,8 +71,9 @@ public class GameManager : MonoBehaviour
     {
         if (IsFishCaught == false)
             return;
-
+      
         currentFish.Escape();
+        currentFish = null;
 
         //only play lost animation if not being zapped and not already playing lost anim as to not override zap animation
         if (IsZapped == false && playingLostAnim == false)
@@ -80,8 +84,9 @@ public class GameManager : MonoBehaviour
     {
         if (IsFishCaught == false)
             return;
-
+        
         currentFish.Escape();
+        currentFish = null;
     }
 
     public void OnFishShatter()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private const float GAME_LENGTH = 219;
-    private float[] eventTimeStamps = new float[] { 10, 35, 49, 84, 100, 119, 154, 185, 216 };
+    private float[] eventTimeStamps = new float[] { 10, 35, 49, 75, 82, 102, 120, 154, 185, 216, 240 };
 
     private const float START_POS_LEFT = -10;
     private const float START_POS_RIGHT = 10;
@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         if (timer > eventTimeStamps[currentStage])
         {
             if (currentStage == 0)
-            {             
+            {
                 Debug.Log("Enter Stage 1");
                 normalFishEnabled = true;
                 asteroidEnabled = true;
@@ -88,7 +88,7 @@ public class SpawnManager : MonoBehaviour
             else if (currentStage == 3)
             {
                 Debug.Log("Enter Stage 4 (stop for tutorial)");
-                SpawnRockFishTutorial();
+                
                 normalFishEnabled = false;
                 asteroidEnabled = false;
                 rocketFishEnabled = false;
@@ -96,18 +96,24 @@ public class SpawnManager : MonoBehaviour
             }
             else if (currentStage == 4)
             {
-                Debug.Log("Enter Stage 6 (rock spawns for tutorial)");
-                SpawnRockFish();
-                SpawnAsteroid();
-                rockFishEnabled = true;
-                rockFishSpawnInterval = 4;
-                asteroidEnabled = true;
-                asteroidSpawnInterval = 3;
+                Debug.Log("Enter Stage 6 (spawns rock tutorial)");
+                SpawnRockFishTutorial();
                 currentStage++;
             }
             else if (currentStage == 5)
             {
-                Debug.Log("Enter Stage 6 (spawn everyone again)");             
+                Debug.Log("Enter Stage 6 (spawn rocks for tutorial )");
+                SpawnRockFish();
+                SpawnAsteroid();
+                rockFishEnabled = true;
+                asteroidEnabled = true;
+                rockFishSpawnInterval = 5;
+                asteroidSpawnInterval = 5;
+                currentStage++;
+            }
+            else if (currentStage == 6)
+            {
+                Debug.Log("Enter Stage 6 (spawn everyone again)");
                 normalFishSpawnInterval = 4;
                 asteroidSpawnInterval = 4.5f;
                 rockFishSpawnInterval = 9;
@@ -116,7 +122,7 @@ public class SpawnManager : MonoBehaviour
                 rocketFishEnabled = true;
                 currentStage++;
             }
-            else if (currentStage == 6)
+            else if (currentStage == 7)
             {
                 Debug.Log("Enter Stage 7 (add jelly)");
                 SpawnJellyfish();
@@ -127,9 +133,9 @@ public class SpawnManager : MonoBehaviour
                 jellyfishEnabled = true;
                 currentStage++;
             }
-            else if (currentStage == 7)
+            else if (currentStage == 8)
             {
-                Debug.Log("Enter Stage 8 (speed up)");
+                Debug.Log("Enter Stage 8 (final speed up)");
                 normalFishSpawnInterval = 2.5f;
                 asteroidSpawnInterval = 3.5f;
                 rocketFishSpawnInterval = 5;
@@ -137,7 +143,7 @@ public class SpawnManager : MonoBehaviour
                 jellyfishSpawnInterval = 5;
                 currentStage++;
             }
-            else if (currentStage == 8)
+            else if (currentStage == 9)
             {
                 Debug.Log("Enter Stage 9 (stop end)");
                 normalFishEnabled = false;
@@ -145,6 +151,11 @@ public class SpawnManager : MonoBehaviour
                 rocketFishEnabled = false;
                 rockFishEnabled = false;
                 jellyfishEnabled = false;
+                currentStage++;               
+            }
+            else if (currentStage == 10)
+            {
+                SceneController.Instance.NextScene("Results"); //load final scene        
             }
         }
     }
@@ -371,7 +382,7 @@ public class SpawnManager : MonoBehaviour
 
     public static class RockFishValues
     {
-        public static float moveSpeed = 0.2f;
+        public static float moveSpeed = 0.13f;
 
         public static float waveStrength = 0.2f;
         public static float waveSpeed = 2;

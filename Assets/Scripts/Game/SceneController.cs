@@ -7,9 +7,7 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
 
-    private FadeOut fadeController;
-
-    [SerializeField] private string nextScene;
+    private FadeController fadeController;
 
     private void Awake()
     {
@@ -18,20 +16,14 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
-        fadeController = FindObjectOfType<FadeOut>();
+        fadeController = FindObjectOfType<FadeController>();
     }
 
-    private void Update()
-    {
-        if (Input.anyKey)
-        {
-            StartCoroutine(TransitionScene(nextScene));
-        }
-    }
+    public void NextScene(string sceneName) => StartCoroutine(TransitionScene(sceneName));
 
     public IEnumerator TransitionScene(string sceneName)
     {
-        fadeController.FadeeOut();
+        fadeController.FadeIn();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(sceneName);
     }
