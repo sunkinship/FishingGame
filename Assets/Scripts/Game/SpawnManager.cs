@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private const float GAME_LENGTH = 219;
-    private float[] eventTimeStamps = new float[] { 10, 35, 49, 75, 82, 102, 120, 154, 185, 216, 240 };
+    private readonly float[] eventTimeStamps = new float[] { 7, 35, 49, 75, 82, 100, 112, 154, 185, 216, 240 };
 
     private const float START_POS_LEFT = -10;
     private const float START_POS_RIGHT = 10;
@@ -96,7 +95,7 @@ public class SpawnManager : MonoBehaviour
             }
             else if (currentStage == 4)
             {
-                Debug.Log("Enter Stage 6 (spawns rock tutorial)");
+                Debug.Log("Enter Stage 5 (spawns rock tutorial)");
                 SpawnRockFishTutorial();
                 currentStage++;
             }
@@ -155,7 +154,7 @@ public class SpawnManager : MonoBehaviour
             }
             else if (currentStage == 10)
             {
-                SceneController.Instance.NextScene("Results"); //load final scene        
+                SceneController.Instance.SwitchScene("Results"); //load final scene        
             }
         }
     }
@@ -176,16 +175,14 @@ public class SpawnManager : MonoBehaviour
 
 
     #region ASTEROID SPAWN
-    private Coroutine CheckToSpawnAsteroid()
+    private void CheckToSpawnAsteroid()
     {
         if (spawningAsteroid)
-            return co_spawningAsteroid;
+            return;
 
         float currentTime = Time.time;
 
         co_spawningAsteroid = StartCoroutine(WaitToSpawnAsteroid(currentTime));
-
-        return co_spawningAsteroid;
     }
 
     private IEnumerator WaitToSpawnAsteroid(float lastTime)
@@ -206,21 +203,19 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = Instantiate(asteroid);
         obj.transform.position = new(moveLeft ? START_POS_RIGHT : START_POS_LEFT, yPos);
         EnemyAsteroid enemyAsteroid = obj.GetComponent<EnemyAsteroid>();
-        enemyAsteroid.Initialize(moveLeft, AsteroidValues.moveSpeed, AsteroidValues.waveStrength, AsteroidValues.waveSpeed);
+        enemyAsteroid.InitializeDirection(moveLeft);
     }
     #endregion
 
     #region JELLYFISH SPAWN
-    private Coroutine CheckToSpawnJellyfish()
+    private void CheckToSpawnJellyfish()
     {
         if (spawningJellyfish)
-            return co_spawningJellyfish;
+            return;
 
         float currentTime = Time.time;
 
         co_spawningJellyfish = StartCoroutine(WaitToSpawnJellyfish(currentTime));
-
-        return co_spawningJellyfish;
     }
 
     private IEnumerator WaitToSpawnJellyfish(float lastTime)
@@ -241,21 +236,19 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = Instantiate(jellyfish);
         obj.transform.position = new(moveLeft ? START_POS_RIGHT : START_POS_LEFT, yPos);
         Jellyfish jelly = obj.GetComponent<Jellyfish>();
-        jelly.Initialize(moveLeft, JellyfishValues.moveSpeed, JellyfishValues.waveStrength, JellyfishValues.waveSpeed);
+        jelly.InitializeDirection(moveLeft);
     }
     #endregion
 
     #region NORMAL FISH SPAWN
-    private Coroutine CheckToSpawnNormalFish()
+    private void CheckToSpawnNormalFish()
     {
         if (spawningNormalFish)
-            return co_spawningNormalFish;
+            return;
 
         float currentTime = Time.time;
 
         co_spawningNormalFish = StartCoroutine(WaitToSpawnNormalFish(currentTime));
-
-        return co_spawningNormalFish;
     }
 
     private IEnumerator WaitToSpawnNormalFish(float lastTime)
@@ -276,21 +269,19 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = Instantiate(normalFish);
         obj.transform.position = new(moveLeft ? START_POS_RIGHT : START_POS_LEFT, yPos);
         BaseFish baseFish = obj.GetComponent<BaseFish>();
-        baseFish.Initialize(moveLeft, DefaultFishValues.moveSpeed, DefaultFishValues.waveStrength, DefaultFishValues.waveSpeed);
+        baseFish.Initialize(moveLeft);
     }
     #endregion
 
     #region ROCKET FISH SPAWN
-    private Coroutine CheckToSpawnRocketFish()
+    private void CheckToSpawnRocketFish()
     {
         if (spawningRocketFish)
-            return co_spawningRocketFish;
+            return;
 
         float currentTime = Time.time;
 
         co_spawningRocketFish = StartCoroutine(WaitToSpawnRocketFish(currentTime));
-
-        return co_spawningRocketFish;
     }
 
     private IEnumerator WaitToSpawnRocketFish(float lastTime)
@@ -311,21 +302,19 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = Instantiate(rocketFish);
         obj.transform.position = new(moveLeft ? START_POS_RIGHT : START_POS_LEFT, yPos);
         BaseFish baseFish = obj.GetComponent<BaseFish>();
-        baseFish.Initialize(moveLeft, RocketFishValues.moveSpeed, RocketFishValues.waveStrength, RocketFishValues.waveSpeed);
+        baseFish.Initialize(moveLeft);
     }
     #endregion
 
     #region ROCK FISH SPAWN
-    private Coroutine CheckToSpawnRockFish()
+    private void CheckToSpawnRockFish()
     {
         if (spawningRockFish)
-            return co_spawningRockFish;
+            return;
 
         float currentTime = Time.time;
 
         co_spawningRockFish = StartCoroutine(WaitToSpawnRockFish(currentTime));
-
-        return co_spawningRockFish;
     }
 
     private IEnumerator WaitToSpawnRockFish(float lastTime)
@@ -346,7 +335,7 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = Instantiate(rockFish);
         obj.transform.position = new(moveLeft ? START_POS_RIGHT : START_POS_LEFT, yPos);
         BaseFish baseFish = obj.GetComponent<BaseFish>();
-        baseFish.Initialize(moveLeft, RockFishValues.moveSpeed, RockFishValues.waveStrength, RockFishValues.waveSpeed);
+        baseFish.Initialize(moveLeft);
     }
     #endregion
 
@@ -355,53 +344,4 @@ public class SpawnManager : MonoBehaviour
         GameObject obj = Instantiate(tutorial);
         obj.transform.position = new(13.94f , - 1.15f);
     }
-
-    private enum FishType { normal, rocket, rock }
-
-    private enum EnemyType { asteroid, jellyfish }
-
-    #region ENTITY VALUES 
-    public static class DefaultFishValues
-    {
-        public static float moveSpeed = 0.4f;
-
-        public static float waveStrength = 0.3f;
-        public static float waveSpeed = 3;
-    }
-
-    private static class RocketFishValues
-    {
-        public static float moveSpeed = 0.4f;
-
-        public static float waveStrength = 0.3f;
-        public static float waveSpeed = 1;
-
-        public static float entryTime = 1;
-        public static float rocketSpeed = 10;
-    }
-
-    public static class RockFishValues
-    {
-        public static float moveSpeed = 0.13f;
-
-        public static float waveStrength = 0.2f;
-        public static float waveSpeed = 2;
-    }
-
-    public static class AsteroidValues
-    {
-        public static float moveSpeed = 0.2f;
-
-        public static float waveStrength = 0.3f;
-        public static float waveSpeed = 5;
-    }
-
-    public static class JellyfishValues
-    {
-        public static float moveSpeed = 0.3f;
-
-        public static float waveStrength = 0.3f;
-        public static float waveSpeed = 1;
-    }
-    #endregion
 }

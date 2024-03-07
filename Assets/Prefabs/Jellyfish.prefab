@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveLeft: 0
   moveSpeed: 0.3
-  waveStrength: 0.1
+  waveStrength: 0.3
   waveSpeed: 1
   sr: {fileID: 5770975835590404885}
 --- !u!58 &5770975835590404886

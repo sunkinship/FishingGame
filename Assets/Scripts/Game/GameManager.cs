@@ -28,11 +28,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        audioManger.PlayMusic("Space Fishin\'", 0.6f);
-    }
-
     public void OnCatchConfirm()
     {
         if (IsFishCaught == false)

@@ -54,14 +54,11 @@ public class BaseFish : MonoBehaviour
             SwimAway();
     }
 
-    public virtual void Initialize(bool moveLeft, float moveSpeed, float waveStrength, float waveSpeed)
+    public virtual void Initialize(bool moveLeft)
     {
         this.moveLeft = moveLeft;
-        this.moveSpeed = moveSpeed;
-        this.waveStrength = waveStrength;
-        this.waveSpeed = waveSpeed;
 
-        swimController = new(this.moveLeft, this.moveSpeed, this.waveStrength, this.waveSpeed, sr, transform);
+        swimController = new(this.moveLeft, moveSpeed, waveStrength, waveSpeed, sr, transform);
 
         initialized = true;
     }

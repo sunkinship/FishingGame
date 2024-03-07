@@ -7,7 +7,10 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
 
-    private FadeController fadeController;
+    private Coroutine co_switchingScenes = null;
+    public bool SwitchingScenes => co_switchingScenes != null;
+
+    private FadeController fadeController => FadeController.Instance;
 
     private void Awake()
     {
@@ -16,15 +19,34 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
-        fadeController = FindObjectOfType<FadeController>();
+        Debug.Log("Initial Fade");
+        fadeController.InitialFade();
     }
 
-    public void NextScene(string sceneName) => StartCoroutine(TransitionScene(sceneName));
+    public void SwitchScene(string sceneName, float speed = FadeController.DEAFULT_FADE_SPEED) => StartCoroutine(TransitionScene(sceneName, speed));
 
-    public IEnumerator TransitionScene(string sceneName)
+    public void SwitchScene(string sceneName) => co_switchingScenes = StartCoroutine(TransitionScene(sceneName, FadeController.DEAFULT_FADE_SPEED));
+
+    private IEnumerator TransitionScene(string sceneName, float speed)
     {
-        fadeController.FadeIn();
-        yield return new WaitForSeconds(1);
+        fadeController.FadeIn(speed);
+
+        while (fadeController.FadingIn)
+            yield return null;
+
+        co_switchingScenes = null;
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void Quit(float speed = FadeController.DEAFULT_FADE_SPEED) => StartCoroutine(Quitting(speed));
+
+    private IEnumerator Quitting(float speed)
+    {
+        fadeController.FadeIn(speed);
+
+        while (fadeController.FadingIn)
+            yield return null;
+
+        Application.Quit();
     }
 }

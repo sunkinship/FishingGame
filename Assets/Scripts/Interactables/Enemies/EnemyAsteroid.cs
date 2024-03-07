@@ -25,25 +25,25 @@ public class EnemyAsteroid : MonoBehaviour
 
     private GameManager Manager => GameManager.Instance;
 
-    private void Start()
-    {
-        moveController = new(moveLeft, moveSpeed, waveStrength, waveSpeed, sr, transform);
-    }
+    private bool initialized;
+
 
     private void FixedUpdate()
     {
+        if (!initialized)
+            return;
+
         moveController.Move();
         Rotate();
     }
 
-    public virtual void Initialize(bool moveLeft, float moveSpeed, float waveStrength, float waveSpeed)
+    public virtual void InitializeDirection(bool moveLeft)
     {
         this.moveLeft = moveLeft;
-        this.moveSpeed = moveSpeed;
-        this.waveStrength = waveStrength;
-        this.waveSpeed = waveSpeed;
 
-        moveController = new(this.moveLeft, this.moveSpeed, this.waveStrength, this.waveSpeed, sr, transform);
+        moveController = new(this.moveLeft, moveSpeed, waveStrength, waveSpeed, sr, transform);
+
+        initialized = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

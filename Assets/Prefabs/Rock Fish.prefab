@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveLeft: 1
-  moveSpeed: 0.4
+  moveSpeed: 0.18
   escapeSpeed: 5
   waveStrength: 0.2
   waveSpeed: 2
@@ -128,6 +128,7 @@ MonoBehaviour:
   anim: {fileID: 3381263662115300723}
   hookPointOffset: {x: 0, y: -0.1}
   state: 0
+  escaped: 0
 --- !u!61 &3381263662115300720
 BoxCollider2D:
   m_ObjectHideFlags: 0

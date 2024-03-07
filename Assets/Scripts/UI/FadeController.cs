@@ -1,51 +1,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FadeController : MonoBehaviour
 {
-    public CanvasGroup canvasGroup;
+    public static FadeController Instance;
 
-    public bool fadeIn = false;
-    public bool fadeOut = false;
+    public const float DEAFULT_FADE_SPEED = 1f;
 
-    public float timeToFade;
+    private CanvasGroup canvasGroup;
 
-    void Update()
+    private Coroutine co_fadingIn = null;
+    private Coroutine co_fadingOut = null;
+
+    public bool FadingIn => co_fadingIn != null;
+    public bool FadingOut => co_fadingOut != null;
+    public bool Fading => FadingIn || FadingOut;
+
+
+    private void Awake()
     {
-        if(fadeIn == true)
+        if (Instance == null)
         {
-            if(canvasGroup.alpha < 1)
-            {
-                canvasGroup.alpha += timeToFade * Time.deltaTime;
-                if(canvasGroup.alpha >= 1)
-                {
-                    fadeIn = false;
-                }
-            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+            Destroy(gameObject);
 
-        if (fadeOut == true)
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void FadeIn(float speed = DEAFULT_FADE_SPEED)
+    {
+        if (FadingIn)
+            return;
+
+        if (FadingOut)
         {
-            if (canvasGroup.alpha >= 0)
-            {
-                canvasGroup.alpha -= timeToFade * Time.deltaTime;
-                
-                if (canvasGroup.alpha == 0)
-                {
-                    fadeOut = false;
-                }
-            }
-        }       
+            StopCoroutine(co_fadingOut);
+            co_fadingOut = null;
+        }
+            
+        canvasGroup.blocksRaycasts = true;
+        co_fadingIn = StartCoroutine(FadingInProcess(speed));
     }
 
-    public void FadeIn()
+    private IEnumerator FadingInProcess(float speed)
     {
-        fadeIn = true;
+        float targetAlpha = 1;
+
+        while (canvasGroup.alpha < targetAlpha)
+        {
+            //Debug.Log("Fading In " + canvasGroup.alpha);
+            canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
+            yield return null;
+        }
+        //Debug.Log($"Done fading in {canvasGroup.alpha}");
+        co_fadingIn = null;
     }
 
-    public void FadeOut()
+    public void FadeOut(float speed = DEAFULT_FADE_SPEED)
     {
-        fadeOut = true;  
+        if (FadingOut)
+            return;
+
+        if (FadingIn)
+        {
+            StopCoroutine(co_fadingIn);
+            co_fadingIn = null;
+        }
+           
+        canvasGroup.blocksRaycasts = false;
+        co_fadingOut = StartCoroutine(FadingOutProcess(speed));
+    }
+
+    private IEnumerator FadingOutProcess(float speed)
+    {
+        float targetAlpha = 0;
+
+        while (canvasGroup.alpha > targetAlpha)
+        {
+            //Debug.Log("Fading Out " + canvasGroup.alpha);
+            canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
+            yield return null;
+        }
+        //Debug.Log($"Done fading out {canvasGroup.alpha}");
+        co_fadingOut = null;
+    }
+
+    public void InitialFade()
+    {
+        canvasGroup.alpha = 1;
+        FadeOut();
     }
 }

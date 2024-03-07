@@ -2,43 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class UIAnimation : MonoBehaviour
 {
+    [SerializeField] private Image ui_Image;
+    [SerializeField] private Sprite[] ui_spriteArray;
+    [SerializeField] private float animationSpeed = 0.2f;
 
-    public Image ui_Image;
-
-    public Sprite[] ui_spriteArray;
-
-    public float speed = 0.2f;
-
-    private int indexSprite;
-    Coroutine coroutineAnim;
-    
-    bool isDone = false;
+    private int spriteIndex;
 
     private void Start()
     {
-        StartCoroutine(PlayAnim());
+        StartCoroutine(PlayUIAnimation());
     }
 
-    IEnumerator PlayAnim()
+    IEnumerator PlayUIAnimation()
     {
-
-        yield return new WaitForSeconds(speed);
-
-
-       
-
-        if (indexSprite >= ui_spriteArray.Length)
+        while (true)
         {
-            indexSprite = 0;
-        }
-        ui_Image.sprite = ui_spriteArray[indexSprite];
-        indexSprite += 1;
-        if (isDone == false)
-        {
-            coroutineAnim = StartCoroutine(PlayAnim());
-        }
+            //if end of animation reached, reset to start of array
+            if (spriteIndex >= ui_spriteArray.Length)
+                spriteIndex = 0;
 
+            //go to next sprite in array
+            ui_Image.sprite = ui_spriteArray[spriteIndex];
+            spriteIndex++;
+
+            yield return new WaitForSeconds(animationSpeed);
+        }     
     }
 }

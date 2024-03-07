@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (paused)
                 Resume();
-            else
+            else if (paused == false && FadeController.Instance.Fading == false) //can't pause during fade transition
                 Pause();
         }
     }
@@ -40,6 +40,6 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         paused = false;
-        SceneManager.LoadScene("TitleScreen");
+        SceneController.Instance.SwitchScene("TitleScreen");
     }
 }

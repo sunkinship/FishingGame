@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveLeft: 1
-  moveSpeed: 0.2
+  moveSpeed: 0.4
   escapeSpeed: 15
   waveStrength: 0.3
   waveSpeed: 1
@@ -173,7 +173,8 @@ MonoBehaviour:
   anim: {fileID: 3450745857126494512}
   hookPointOffset: {x: 0.1, y: 0}
   state: 0
-  entryTime: 1.6
+  escaped: 0
+  entryTime: 1.7
   rocketSpeed: 10
   graphic: {fileID: 3450745857126494513}
 --- !u!61 &3450745858076051372

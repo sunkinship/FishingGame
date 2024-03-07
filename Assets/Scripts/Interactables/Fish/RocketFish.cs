@@ -25,9 +25,9 @@ public class RocketFish : BaseFish
         StartCoroutine(EntryAndCountdown());
     }
 
-    public override void Initialize(bool moveLeft, float moveSpeed, float waveStrength, float waveSpeed)
+    public override void Initialize(bool moveLeft)
     {
-        base.Initialize(moveLeft, moveSpeed, waveStrength, waveSpeed);
+        base.Initialize(moveLeft);
 
         //save the sprite's offset so the position can be restored when escaping since the position is lost when caught to account for the centered struggle animation 
         ogOffset = graphic.localPosition;
@@ -35,7 +35,7 @@ public class RocketFish : BaseFish
         if (moveLeft == false)
             SetRocketRight();
 
-        StartCoroutine(EntryAndCountdown());       
+        StartCoroutine(EntryAndCountdown());
     }
 
     public void SetRocketRight()
