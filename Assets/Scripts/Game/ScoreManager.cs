@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
                 score += 15;
             //stone version 
             else
-                score += 100;
+                score += 30;
         }
         //normal fish
         else 

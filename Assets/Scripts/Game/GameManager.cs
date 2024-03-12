@@ -46,10 +46,10 @@ public class GameManager : MonoBehaviour
 
         FishPointAnim();
 
-        currentFish = null;
-
         //add score
         ScoreManager.Instance.AddScore(currentFish);
+
+        currentFish = null;
 
         audioManger.PlaySFX("Yay_SFX");     
     }
