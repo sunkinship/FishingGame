@@ -12,7 +12,7 @@ public class BaseFish : MonoBehaviour
     protected const float TARGET_ESCAPE_X = 135;
 
     [Header("Movement Settings")]
-    [SerializeField] protected bool moveLeft;
+    public bool moveLeft;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float escapeSpeed;
 
@@ -21,8 +21,8 @@ public class BaseFish : MonoBehaviour
     [SerializeField] protected float waveSpeed;   
 
     [Header("References")]
-    [SerializeField] protected SpriteRenderer sr;
-    [SerializeField] protected Animator anim;
+    public SpriteRenderer sr;
+    public Animator anim;
 
     [Header("Other Settings")]
     [SerializeField] protected Vector2 hookPointOffset;
@@ -92,7 +92,7 @@ public class BaseFish : MonoBehaviour
 
         escaped = true;
 
-        Destroy(GetComponent<Collider2D>());
+        transform.tag = "Untagged"; //ensure fish can't be caught again
 
         //play swimming animation
         anim.SetTrigger("Escaped");
@@ -119,4 +119,9 @@ public class BaseFish : MonoBehaviour
     {
         transform.position += -escapeSpeed * Time.deltaTime * escapeDirection;
     } 
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

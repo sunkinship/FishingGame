@@ -19,7 +19,6 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Initial Fade");
         fadeController.InitialFade();
     }
 

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public bool IsZapped {  get; private set; }
     public bool CannotCatchFish => IsFishCaught || IsZapped;
 
-    [HideInInspector] public bool HookedRockFish;
+    public bool HookedRockFish {  get; private set; }   
 
     private bool playingYayAnim, playingLostAnim;
 
@@ -33,19 +33,25 @@ public class GameManager : MonoBehaviour
         if (IsFishCaught == false)
             return;
 
+        HookedRockFish = false;
+
+        //untag fish so it can't be caught again while point anim is playing
+        currentFish.tag = "Untagged";
+
         if (!playingYayAnim)
         {
-            playerAnim.SetTrigger("Yay");
             playingYayAnim = true;
+            playerAnim.SetTrigger("Yay");           
         }
+
+        FishPointAnim();
+
+        currentFish = null;
 
         //add score
         ScoreManager.Instance.AddScore(currentFish);
 
-        HookedRockFish = false;
-        Destroy(currentFish.gameObject);
-
-        audioManger.PlaySFX("Yay_SFX");
+        audioManger.PlaySFX("Yay_SFX");     
     }
 
     public void OnFishHooked(BaseFish fish)
@@ -73,6 +79,8 @@ public class GameManager : MonoBehaviour
         //only play lost animation if not being zapped and not already playing lost anim as to not override zap animation
         if (IsZapped == false && playingLostAnim == false)
             playerAnim.SetTrigger("Lost");
+
+        audioManger.PlaySFX("Hit_SFX");
     }
 
     public void OnFishRelease()
@@ -107,6 +115,20 @@ public class GameManager : MonoBehaviour
         audioManger.PlaySFX("Zap_SFX");
     }
 
+    public void SetHookedRockFish(bool hookedRockFish)
+    {
+        if (hookedRockFish)
+        {
+            HookedRockFish = true;
+            playerAnim.SetBool("Idle", false);
+        }
+        else
+        {
+            HookedRockFish = false;
+            playerAnim.SetBool("Idle", true);
+        }       
+    }
+
     #region ANIM TRIGGERS
     public void EndZapAnim()
     {
@@ -123,4 +145,36 @@ public class GameManager : MonoBehaviour
         playingYayAnim = false;
     }
     #endregion
+
+    //play point animation for fish
+    private void FishPointAnim()
+    {
+        //make sure fish stops following line
+        currentFish.transform.SetParent(null);
+
+        //bring sprite to foreground
+        if (currentFish is RocketFish rocketFish)
+            rocketFish.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Foreground";
+        else
+        {
+            currentFish.sr.sortingLayerName = "Foreground";
+        }
+
+        //flip back so the point ui is not flipped too unless it is the rocket fish since those have a flipped sprite
+        if (currentFish.moveLeft == false && currentFish is not RocketFish)
+            currentFish.sr.flipX = false;
+
+        //play anim trigger for point anim
+        if (currentFish is RockFish rockFish)
+        {
+            if (rockFish.IsShattered)
+                currentFish.anim.SetTrigger("Diamond Capture");
+            else
+                currentFish.anim.SetTrigger("Rock Capture");
+        }
+        else
+        {
+            currentFish.anim.SetTrigger("Capture");         
+        }
+    }
 }

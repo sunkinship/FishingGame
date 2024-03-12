@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
-    private readonly float[] eventTimeStamps = new float[] { 7, 35, 49, 75, 82, 100, 112, 154, 185, 216, 240 };
+    private readonly float[] eventTimeStamps = new float[] { 1, 35, 49, 75, 82, 100, 112, 154, 185, 216, 240 };
 
     private const float START_POS_LEFT = -10;
     private const float START_POS_RIGHT = 10;
     private const float MAX_POS_TOP = 0.5f;
     private const float MIN_POS_BOT = -3f;
+
+    private const float ROCKFISH_MAX_POS_TOP = -2f;
 
     [Header("Fish")]
     [SerializeField] private GameObject normalFish;
@@ -23,7 +26,11 @@ public class SpawnManager : MonoBehaviour
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorial;
 
+    [Header("Timer")]
+    [SerializeField] private TextMeshProUGUI timerText;
+
     private float timer = 0;
+    private float countDown = 240;
     private int currentStage = 0;
 
     private bool normalFishEnabled;
@@ -54,10 +61,14 @@ public class SpawnManager : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
+        countDown -= Time.deltaTime;
 
         CheckTimer();
         SpawnEntities();
+        UpdateTimer();
     }
+
+    private void UpdateTimer() => timerText.text = ((int)countDown).ToString();
 
     private void CheckTimer()
     {
@@ -103,7 +114,6 @@ public class SpawnManager : MonoBehaviour
             {
                 Debug.Log("Enter Stage 6 (spawn rocks for tutorial )");
                 SpawnRockFish();
-                SpawnAsteroid();
                 rockFishEnabled = true;
                 asteroidEnabled = true;
                 rockFishSpawnInterval = 5;
@@ -330,7 +340,7 @@ public class SpawnManager : MonoBehaviour
     private void SpawnRockFish()
     {
         bool moveLeft = Random.Range(0, 2) == 0; //50/50 chance to move left or right
-        float yPos = Random.Range(MAX_POS_TOP, MIN_POS_BOT); //choose y position to spawn
+        float yPos = Random.Range(ROCKFISH_MAX_POS_TOP, MIN_POS_BOT); //choose y position to spawn
 
         GameObject obj = Instantiate(rockFish);
         obj.transform.position = new(moveLeft ? START_POS_RIGHT : START_POS_LEFT, yPos);

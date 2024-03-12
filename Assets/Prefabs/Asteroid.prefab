@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 419259553903926516}
   - component: {fileID: 419259553903926519}
   - component: {fileID: 419259553903926512}
+  - component: {fileID: 7899434384676528010}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -101,10 +102,11 @@ MonoBehaviour:
   moveLeft: 1
   moveSpeed: 0.3
   rotateLeft: 1
-  rotationSpeed: 10
-  waveStrength: 0.3
+  rotationSpeed: 40
+  waveStrength: 0.6
   waveSpeed: 5
   sr: {fileID: 419259553903926516}
+  anim: {fileID: 7899434384676528010}
 --- !u!58 &419259553903926512
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -121,3 +123,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!95 &7899434384676528010
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419259553903926507}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5c5797d2a7d2f5b4db95d0fcf2db2455, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

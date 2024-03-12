@@ -9,19 +9,19 @@ public class RockFish : BaseFish
     public void Shatter()
     {
         IsShattered = true;
-        GameManager.Instance.HookedRockFish = false;
+        GameManager.Instance.SetHookedRockFish(false);
         anim.SetTrigger("Shatter");
     }
 
     public override void Hooked(Transform catchPoint)
     {
         base.Hooked(catchPoint);
-        GameManager.Instance.HookedRockFish = true;
+        GameManager.Instance.SetHookedRockFish(true);
     }
 
     public override void Escape()
     {
         base.Escape();
-        GameManager.Instance.HookedRockFish = false;
+        GameManager.Instance.SetHookedRockFish(false);
     }
 }

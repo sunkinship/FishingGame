@@ -8,13 +8,14 @@ public class FishingController : MonoBehaviour
 
     [SerializeField] private Transform movePoint, minPosition, maxPosition;
     [SerializeField] private FishingLine fishingLine;
+    [SerializeField] private Animator playerAnim;
    
     private float mouseYPos;
 
     [SerializeField] private float slowReelSpeed;
 
     private Coroutine co_movingPoint = null;
-    private bool movingPoint => co_movingPoint != null;
+    private bool MovingPoint => co_movingPoint != null;
 
     private void Start()
     {
@@ -29,12 +30,16 @@ public class FishingController : MonoBehaviour
 
         //cannot move fishing line if zapped
         if (GameManager.Instance.IsZapped || PauseMenu.paused)
+        {
+            if (co_movingPoint != null)
+                StopCoroutine(co_movingPoint);
             return;
-
+        }
+            
         //move fishing line
         if (GameManager.Instance.HookedRockFish == false)
             ControlLine();
-        else
+        else 
             SlowedControl();
 
         //check for mouse input
@@ -112,7 +117,10 @@ public class FishingController : MonoBehaviour
         //mouse is below bounds so expand line to max length
         else if (MouseBelowBounds())
         {
+            if (co_movingPoint != null)
+                StopCoroutine(co_movingPoint);
             movePoint.position = maxPosition.position;
+            playerAnim.SetBool("Idle", true);
         }
         //mouse is within bounds so move line to mouse position
         else
@@ -124,16 +132,23 @@ public class FishingController : MonoBehaviour
                 SlowReelMovement(new Vector3(movePoint.position.x, mouseYPos, movePoint.position.z));
             //move down
             else
+            {
+                if (co_movingPoint != null)
+                    StopCoroutine(co_movingPoint);
                 movePoint.position = new Vector3(movePoint.position.x, mouseYPos, movePoint.position.z);
+                playerAnim.SetBool("Idle", true);
+            }              
         }
     }
 
     private Coroutine SlowReelMovement(Vector3 target)
     {
-        if (movingPoint)
+        if (MovingPoint)
             StopCoroutine(co_movingPoint);
 
         co_movingPoint = StartCoroutine(MoveToTarget(target));
+        playerAnim.SetBool("Idle", false);
+        playerAnim.SetTrigger("Heavy");
 
         return co_movingPoint;
     }
@@ -146,6 +161,7 @@ public class FishingController : MonoBehaviour
             yield return null;
         }
 
+        playerAnim.SetBool("Idle", true);
         co_movingPoint = null;
     }
     #endregion

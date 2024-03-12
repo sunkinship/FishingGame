@@ -13,4 +13,9 @@ public class RocketSFXEvent : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Blast_Off_SFX", 0.3f);
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

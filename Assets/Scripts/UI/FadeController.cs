@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FadeController : MonoBehaviour
 {
@@ -57,7 +56,7 @@ public class FadeController : MonoBehaviour
             canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
             yield return null;
         }
-        //Debug.Log($"Done fading in {canvasGroup.alpha}");
+    
         co_fadingIn = null;
     }
 
@@ -79,14 +78,14 @@ public class FadeController : MonoBehaviour
     private IEnumerator FadingOutProcess(float speed)
     {
         float targetAlpha = 0;
-
+        
         while (canvasGroup.alpha > targetAlpha)
         {
-            //Debug.Log("Fading Out " + canvasGroup.alpha);
+            //Debug.Log($"Fading Out Current {canvasGroup.alpha} Moving To {Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime)} Target {targetAlpha}");
             canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
             yield return null;
         }
-        //Debug.Log($"Done fading out {canvasGroup.alpha}");
+     
         co_fadingOut = null;
     }
 

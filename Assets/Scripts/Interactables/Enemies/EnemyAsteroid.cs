@@ -18,6 +18,9 @@ public class EnemyAsteroid : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Animator anim;
+
+    private Vector3 rotationVector;
 
     private bool shatteredRock;
 
@@ -40,6 +43,8 @@ public class EnemyAsteroid : MonoBehaviour
     public virtual void InitializeDirection(bool moveLeft)
     {
         this.moveLeft = moveLeft;
+        rotateLeft = moveLeft;
+        rotationVector = rotateLeft ? Vector3.forward : Vector3.back;
 
         moveController = new(this.moveLeft, moveSpeed, waveStrength, waveSpeed, sr, transform);
 
@@ -65,6 +70,7 @@ public class EnemyAsteroid : MonoBehaviour
                 else
                 {
                     shatteredRock = true;
+                    anim.SetTrigger("Shatter");
                     Manager.OnFishShatter();
                 }                 
             }
@@ -74,8 +80,6 @@ public class EnemyAsteroid : MonoBehaviour
                 //allow fish to escape
                 if (fish.state == BaseFish.FishState.hooked)
                     HitFish();
-
-
             }         
         }     
     }
@@ -88,9 +92,11 @@ public class EnemyAsteroid : MonoBehaviour
 
     private void Rotate()
     {
-        if (rotateLeft)
-            transform.Rotate(rotationSpeed * Time.deltaTime * Vector3.forward);
-        else
-            transform.Rotate(rotationSpeed * Time.deltaTime * Vector3.back);
+        transform.Rotate(rotationSpeed * Time.deltaTime * rotationVector);
+    }
+
+    public void DestorySelf()
+    {
+        Destroy(gameObject);
     }
 }
